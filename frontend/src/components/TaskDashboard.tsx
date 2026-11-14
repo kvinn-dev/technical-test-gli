@@ -112,23 +112,22 @@ export const TaskDashboard: React.FC<TaskDashboardProps> = ({
   }, [count]);
 
   return (
-    <section className="w-full mb-8 md:mb-10">
+    <section className="w-full mb-6 sm:mb-8 md:mb-10">
       {/* Dynamic Heading */}
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#171717] tracking-tight mb-5 md:mb-6">
-        Task <br className="sm:hidden" />
-        Dashboard{" "}
-        <span className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#77777F]">
+      <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#171717] tracking-tight mb-4 sm:mb-5 md:mb-6 whitespace-nowrap">
+        Task Dashboard{" "}
+        <span className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-[#77777F]">
           ({count})
         </span>
       </h1>
 
       {/* Folder Cards Container */}
       {count === 0 ? (
-        <div className="bg-white/80 border border-dashed border-[#DCDCE0] rounded-3xl p-8 text-center">
-          <p className="text-[#77777F] text-sm md:text-base font-medium">
+        <div className="bg-white/80 border border-dashed border-[#DCDCE0] rounded-2xl md:rounded-3xl p-5 sm:p-6 md:p-8 text-center">
+          <p className="text-xs sm:text-sm md:text-base text-[#77777F] font-medium">
             No tasks in progress yet.
           </p>
-          <p className="text-xs text-[#9CA3AF] mt-1">
+          <p className="text-[10px] sm:text-xs text-[#9CA3AF] mt-1">
             Tasks with "In Progress" status will appear here as folder cards.
           </p>
         </div>
@@ -141,22 +140,23 @@ export const TaskDashboard: React.FC<TaskDashboardProps> = ({
               <button
                 type="button"
                 onClick={() => handleScroll("left")}
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-20
-                           w-10 h-10 rounded-full bg-white/95
+                className="absolute left-1 sm:left-1.5 md:left-2 top-1/2 -translate-y-1/2 z-20
+                           w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10
+                           rounded-full bg-white/95
                            shadow-md border border-[#DCDCE0]
                            flex items-center justify-center
                            text-[#171717] hover:bg-white
-                           transition-colors"
+                           transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
                 aria-label="Scroll folders left"
               >
-                <ChevronLeft size={22} />
+                <ChevronLeft className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 lg:w-[22px] lg:h-[22px]" />
               </button>
             )}
 
             {/* Horizontal Scroll Area */}
             <div
               ref={scrollContainerRef}
-              className="flex overflow-x-auto hide-scrollbar gap-4 pb-3"
+              className="flex overflow-x-auto hide-scrollbar gap-3 sm:gap-3.5 md:gap-4 pb-2 sm:pb-3"
             >
               {inProgressTasks.map((task, index) => (
                 <FolderCard
@@ -173,31 +173,32 @@ export const TaskDashboard: React.FC<TaskDashboardProps> = ({
               <button
                 type="button"
                 onClick={() => handleScroll("right")}
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-20
-                           w-10 h-10 rounded-full bg-white/95
+                className="absolute right-1 sm:right-1.5 md:right-2 top-1/2 -translate-y-1/2 z-20
+                           w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10
+                           rounded-full bg-white/95
                            shadow-md border border-[#DCDCE0]
                            flex items-center justify-center
                            text-[#171717] hover:bg-white
-                           transition-colors"
+                           transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
                 aria-label="Scroll folders right"
               >
-                <ChevronRight size={22} />
+                <ChevronRight className="w-4 h-4 sm:w-[18px] sm:h-[18px] md:w-5 md:h-5 lg:w-[22px] lg:h-[22px]" />
               </button>
             )}
           </div>
 
           {/* Carousel Pagination Dots */}
           {pageCount > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-3">
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-2 sm:mt-2.5 md:mt-3">
               {Array.from({ length: pageCount }).map((_, index) => (
                 <button
                   key={index}
                   type="button"
                   onClick={() => handlePageClick(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
+                  className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer ${
                     activePage === index
-                      ? "w-6 bg-[#171717]"
-                      : "w-2 bg-[#C4C4C8] hover:bg-[#77777F]"
+                      ? "w-4 sm:w-5 md:w-6 bg-[#171717]"
+                      : "w-1.5 sm:w-2 bg-[#C4C4C8] hover:bg-[#77777F]"
                   }`}
                   aria-label={`Go to folder page ${index + 1}`}
                   aria-current={activePage === index ? "true" : undefined}
