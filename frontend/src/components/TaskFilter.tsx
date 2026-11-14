@@ -46,11 +46,10 @@ export const TaskFilter: React.FC<TaskFilterProps> = ({
 
   // Measure the active button's position and width.
   const updateIndicator = () => {
-    const container = containerRef.current;
     const activeIndex = filterOptions.indexOf(currentFilter);
     const activeButton = buttonRefs.current[activeIndex];
 
-    if (!container || !activeButton) return;
+    if (!activeButton) return;
 
     setIndicator({
       left: activeButton.offsetLeft,
@@ -94,7 +93,7 @@ export const TaskFilter: React.FC<TaskFilterProps> = ({
             }}
             type="button"
             onClick={() => onFilterChange(filter)}
-            className={`relative z-10 px-3.5 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold whitespace-nowrap cursor-pointer transition-colors duration-200 ${
+            className={`relative z-10 px-2.5 sm:px-3 md:px-3.5 lg:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs md:text-[13px] lg:text-sm font-semibold whitespace-nowrap cursor-pointer transition-colors duration-200 ${
               isActive ? "text-white" : "text-[#77777F] hover:text-[#171717]"
             }`}
           >
@@ -102,7 +101,7 @@ export const TaskFilter: React.FC<TaskFilterProps> = ({
 
             {count !== null && (
               <span
-                className={`ml-1 text-[11px] font-normal ${
+                className={`ml-1 text-[9px] sm:text-[10px] md:text-[11px] lg:text-[11px] font-normal ${
                   isActive ? "text-white/80" : "text-[#77777F]"
                 }`}
               >
