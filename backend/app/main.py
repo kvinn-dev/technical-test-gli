@@ -31,11 +31,12 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Allowed origins for CORS (React + Vite development servers)
+# Allowed origins for CORS (React + Vite development servers and Docker frontend)
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "http://localhost:3000",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
 ]
 
 # Enable Cross-Origin Resource Sharing (CORS)

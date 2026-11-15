@@ -1,0 +1,27 @@
+# Virtual environments
+.venv
+venv
+ENV
+env
+
+# Byte-compiled / cache files
+__pycache__
+*.py[cod]
+*$py.class
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.coverage
+htmlcov
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Local logs and test files
+*.log
+test_api.py
+
+# System files
+.DS_Store
