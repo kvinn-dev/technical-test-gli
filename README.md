@@ -6,7 +6,7 @@ Task Tracker dirancang untuk membantu pengguna mengelola aktivitas dan pekerjaan
 
 ## Overview
 
-Task Tracker merupakan aplikasi yang berfokus pada pengelolaan tugas (_task management_). Pengguna dapat mengorganisasi tugas, melihat detail informasi, memperbarui data, serta memantau progres pengerjaan berdasarkan status masing-masing tugas.
+Task Tracker merupakan aplikasi yang berfokus pada pengelolaan tugas (*task management*). Pengguna dapat mengorganisasi tugas, melihat detail informasi, memperbarui data, serta memantau progres pengerjaan berdasarkan status masing-masing tugas.
 
 Setiap tugas memiliki tiga status pengerjaan:
 
@@ -60,6 +60,7 @@ task-tracker-gli/
 │   └── requirements.txt
 │
 ├── docs/
+│   ├── docker.md
 │   ├── installation.md
 │   ├── requirements.md
 │   └── system-design.md
@@ -83,9 +84,19 @@ task-tracker-gli/
 
 ## Installation
 
-Untuk panduan lengkap mengenai persyaratan sistem, konfigurasi environment variables, instalasi dependensi, dan cara menjalankan aplikasi secara lokal, silakan kunjungi:
+Terdapat dua cara untuk menjalankan aplikasi Task Tracker:
+
+### 1. Manual Installation
+
+Menjalankan frontend, backend, dan database secara terpisah di lingkungan lokal.
 
 [**Installation Guide →**](docs/installation.md)
+
+### 2. Docker Installation
+
+Menjalankan seluruh layanan aplikasi menggunakan Docker Compose, termasuk frontend, backend, dan PostgreSQL.
+
+[**Docker Guide →**](docs/docker.md)
 
 ## Development Progress
 
