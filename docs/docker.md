@@ -6,6 +6,25 @@ Setup ini dirancang sebagai alternatif kontainerisasi yang mandiri, tanpa mengga
 
 ---
 
+> [!IMPORTANT]
+> **Docker setup tersedia pada branch `feature/docker-setup`, bukan pada branch `main`.**
+>
+> Sebelum mengikuti panduan ini, pastikan Anda menggunakan branch tersebut:
+>
+> ```bash
+> git clone -b feature/docker-setup https://github.com/kvinn-dev/technical-test-gli.git
+> cd technical-test-gli
+> ```
+>
+> Jika repository sudah tersedia secara lokal, jalankan:
+>
+> ```bash
+> git fetch origin
+> git switch feature/docker-setup
+> git pull origin feature/docker-setup
+> ```
+
+
 ## 1. Arsitektur Docker
 
 Aplikasi diorkestrasi menggunakan `docker-compose.yml` dengan 3 layanan terisolasi:
