@@ -10,28 +10,25 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   task,
   onClick,
 }) => {
-  const getStatusBadge = (status: TaskStatus) => {
+  const getStatusStyle = (status: TaskStatus) => {
     switch (status) {
       case "Todo":
-        return (
-          <span className="inline-flex items-center px-2 sm:px-2.5 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] sm:text-[11px] md:text-xs font-semibold bg-[#F3F4F6] text-[#4B5563] border border-[#E5E7EB]">
-            Todo
-          </span>
-        );
+        return {
+          card: "bg-[#E0F2FE]/70 hover:bg-[#E0F2FE] border-[#BAE6FD]",
+          badge: "bg-[#12B5E5] text-white",
+        };
+
       case "In Progress":
-        return (
-          <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] sm:text-[11px] md:text-xs font-semibold bg-[#E0F7FE] text-[#0284C7] border border-[#BAE6FD]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#0284C7] animate-pulse" />
-            In Progress
-          </span>
-        );
+        return {
+          card: "bg-[#FEF3C7]/70 hover:bg-[#FEF3C7] border-[#FDE68A]",
+          badge: "bg-[#F5B91B] text-white",
+        };
+
       case "Done":
-        return (
-          <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] sm:text-[11px] md:text-xs font-semibold bg-[#FEF3C7] text-[#D97706] border border-[#FDE68A]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D97706]" />
-            Done
-          </span>
-        );
+        return {
+          card: "bg-[#DCFCE7]/70 hover:bg-[#DCFCE7] border-[#BBF7D0]",
+          badge: "bg-[#16A34A] text-white",
+        };
     }
   };
 
@@ -48,6 +45,8 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
     }
   };
 
+  const styles = getStatusStyle(task.status);
+
   return (
     <div
       onClick={() => onClick(task)}
@@ -59,16 +58,16 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
           onClick(task);
         }
       }}
-      className="group bg-[#FBFBFC] hover:bg-white border border-[#EBEBEF] hover:border-[#D5D5D9] rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-5 flex items-center justify-between gap-2 sm:gap-3 md:gap-4 transition-all duration-150 cursor-pointer shadow-2xs hover:shadow-xs active:scale-[0.99]"
+      className={`group border rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-5 flex items-center justify-between gap-2 sm:gap-3 md:gap-4 transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-xs active:scale-[0.99] ${styles.card}`}
     >
       {/* Title & Description */}
       <div className="flex-1 min-w-0 pr-1 sm:pr-2">
-        <h4 className="font-semibold text-xs sm:text-sm md:text-[15px] lg:text-base text-[#171717] group-hover:text-black line-clamp-1 leading-snug">
+        <h4 className="font-bold text-xs sm:text-sm md:text-[15px] lg:text-lg text-[#171717] group-hover:text-black line-clamp-1 leading-snug">
           {task.title}
         </h4>
 
         {task.description ? (
-          <p className="text-[10px] sm:text-xs md:text-[13px] lg:text-sm text-[#77777F] mt-1 line-clamp-1 leading-normal">
+          <p className="text-[10px] sm:text-xs md:text-[13px] lg:text-sm text-[#52525B] mt-1 line-clamp-1 leading-normal">
             {task.description}
           </p>
         ) : (
@@ -77,13 +76,19 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
           </p>
         )}
 
-        <div className="flex items-center gap-2 sm:gap-3 mt-1.5 md:mt-2 text-[9px] sm:text-[10px] md:text-[11px] text-[#9CA3AF]">
+        <div className="flex items-center gap-2 sm:gap-3 mt-1.5 md:mt-2 text-[9px] sm:text-[10px] md:text-[12px] text-[#71717A]">
           <span>Created: {formatDate(task.created_at)}</span>
         </div>
       </div>
 
       {/* Status Badge */}
-      <div className="flex-shrink-0">{getStatusBadge(task.status)}</div>
+      <div className="flex-shrink-0 self-end">
+        <span
+          className={`inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] sm:text-[11px] md:text-xs font-semibold border ${styles.badge}`}
+        >
+          {task.status}
+        </span>
+      </div>
     </div>
   );
 };

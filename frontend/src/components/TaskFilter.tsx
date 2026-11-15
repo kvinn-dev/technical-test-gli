@@ -68,49 +68,50 @@ export const TaskFilter: React.FC<TaskFilterProps> = ({
   }, [currentFilter, counts]);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative inline-flex items-center bg-[#EFEFF1] p-1 rounded-full max-w-full overflow-x-auto hide-scrollbar"
-    >
-      {/* Sliding active background */}
+    <div className="w-full flex justify-center md:justify-start">
       <div
-        className="absolute top-1 bottom-1 left-0 bg-[#111111] rounded-full shadow-xs transition-all duration-300 ease-in-out pointer-events-none"
-        style={{
-          width: `${indicator.width}px`,
-          transform: `translateX(${indicator.left}px)`,
-        }}
-      />
+        ref={containerRef}
+        className="relative inline-flex items-center bg-[#EFEFF1] p-0.5 md:p-1 rounded-full max-w-full overflow-x-auto hide-scrollbar"
+      >
+        {/* Sliding active background */}
+        <div
+          className="absolute inset-y-0.5 left-0 bg-[#111111] rounded-full shadow-xs transition-all duration-300 ease-in-out pointer-events-none"
+          style={{
+            width: `${indicator.width}px`,
+            transform: `translateX(${indicator.left}px)`,
+          }}
+        />
+        {filterOptions.map((filter, index) => {
+          const isActive = currentFilter === filter;
+          const count = getCount(filter);
 
-      {filterOptions.map((filter, index) => {
-        const isActive = currentFilter === filter;
-        const count = getCount(filter);
+          return (
+            <button
+              key={filter}
+              ref={(element) => {
+                buttonRefs.current[index] = element;
+              }}
+              type="button"
+              onClick={() => onFilterChange(filter)}
+              className={`relative z-10 px-2.5 md:px-3.5 lg:px-4 py-1 rounded-full text-[10px] sm:text-xs md:text-[13px] lg:text-sm font-semibold whitespace-nowrap cursor-pointer transition-colors duration-200 ${
+                isActive ? "text-white" : "text-[#77777F] hover:text-[#171717]"
+              }`}
+            >
+              {filter}
 
-        return (
-          <button
-            key={filter}
-            ref={(element) => {
-              buttonRefs.current[index] = element;
-            }}
-            type="button"
-            onClick={() => onFilterChange(filter)}
-            className={`relative z-10 px-2.5 sm:px-3 md:px-3.5 lg:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs md:text-[13px] lg:text-sm font-semibold whitespace-nowrap cursor-pointer transition-colors duration-200 ${
-              isActive ? "text-white" : "text-[#77777F] hover:text-[#171717]"
-            }`}
-          >
-            {filter}
-
-            {count !== null && (
-              <span
-                className={`ml-1 text-[9px] sm:text-[10px] md:text-[11px] lg:text-[11px] font-normal ${
-                  isActive ? "text-white/80" : "text-[#77777F]"
-                }`}
-              >
-                ({count})
-              </span>
-            )}
-          </button>
-        );
-      })}
+              {count !== null && (
+                <span
+                  className={`ml-1 text-[9px] sm:text-[10px] md:text-[11px] lg:text-[11px] font-normal ${
+                    isActive ? "text-white/80" : "text-[#77777F]"
+                  }`}
+                >
+                  ({count})
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 };

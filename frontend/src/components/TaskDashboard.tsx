@@ -114,7 +114,7 @@ export const TaskDashboard: React.FC<TaskDashboardProps> = ({
   return (
     <section className="w-full mb-6 sm:mb-8 md:mb-10">
       {/* Dynamic Heading */}
-      <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#171717] tracking-tight mb-4 sm:mb-5 md:mb-6 whitespace-nowrap">
+      <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-[#171717] tracking-tight mb-4 sm:mb-5 md:mb-6 whitespace-nowrap">
         Task Dashboard{" "}
         <span className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-[#77777F]">
           ({count})

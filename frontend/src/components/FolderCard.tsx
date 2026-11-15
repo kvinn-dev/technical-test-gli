@@ -29,6 +29,16 @@ export const FolderCard: React.FC<FolderCardProps> = ({
         }
       }}
     >
+      {/* Back Folder Layer */}
+      <div
+        className="absolute z-0 top-5 md:top-7 left-1 right-2 h-[150px] md:h-[175px] lg:h-[190px]
+             rounded-xl lg:rounded-2xl"
+        style={{
+          backgroundColor: isBlue ? "#0796C1" : "#D99F0B",
+        }}
+        aria-hidden="true"
+      />
+
       {/* Paper coming out of the folder */}
       <div
         className="absolute z-0 top-8 md:top-10 left-3 md:left-4 right-3 md:right-4 h-[100px] md:h-[120px] lg:h-[120px]
@@ -75,7 +85,7 @@ export const FolderCard: React.FC<FolderCardProps> = ({
       >
         {/* Content */}
         <div className="relative z-10">
-          <h3 className="font-bold text-[#171717] text-base md:text-lg lg:text-xl leading-snug line-clamp-2">
+          <h3 className="font-bold text-[#171717] text-base md:text-lg lg:text-xl leading-snug line-clamp-1">
             {task.title}
           </h3>
 

@@ -1,13 +1,13 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import type { Task, TaskCreate, TaskUpdate } from './types/task';
-import { getTasks, createTask, updateTask, deleteTask } from './api/taskApi';
-import { TaskDashboard } from './components/TaskDashboard';
-import { TaskList } from './components/TaskList';
-import { type FilterType } from './components/TaskFilter';
-import { TaskDetailModal } from './components/TaskDetailModal';
-import { TaskFormModal } from './components/TaskFormModal';
-import { DeleteConfirmationModal } from './components/DeleteConfirmationModal';
-import { AlertCircle, RefreshCw } from 'lucide-react';
+import { useState, useEffect, useMemo, useCallback } from "react";
+import type { Task, TaskCreate, TaskUpdate } from "./types/task";
+import { getTasks, createTask, updateTask, deleteTask } from "./api/taskApi";
+import { TaskDashboard } from "./components/TaskDashboard";
+import { TaskList } from "./components/TaskList";
+import { type FilterType } from "./components/TaskFilter";
+import { TaskDetailModal } from "./components/TaskDetailModal";
+import { TaskFormModal } from "./components/TaskFormModal";
+import { DeleteConfirmationModal } from "./components/DeleteConfirmationModal";
+import { AlertCircle, RefreshCw } from "lucide-react";
 
 export function App() {
   // Task data state
@@ -16,12 +16,12 @@ export function App() {
   const [apiError, setApiError] = useState<string | null>(null);
 
   // Active filter state for All Tasks section
-  const [currentFilter, setCurrentFilter] = useState<FilterType>('All');
+  const [currentFilter, setCurrentFilter] = useState<FilterType>("All");
 
   // Modals state
   const [detailTask, setDetailTask] = useState<Task | null>(null);
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
-  const [formMode, setFormMode] = useState<'create' | 'edit'>('create');
+  const [formMode, setFormMode] = useState<"create" | "edit">("create");
   const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
 
   const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
@@ -38,7 +38,7 @@ export function App() {
       const msg =
         err instanceof Error
           ? err.message
-          : 'Unable to connect to backend API. Please make sure the backend is running.';
+          : "Unable to connect to backend API. Please make sure the backend is running.";
       setApiError(msg);
     } finally {
       setIsLoading(false);
@@ -49,27 +49,39 @@ export function App() {
     fetchTasks();
   }, [fetchTasks]);
 
+  // Prevent background scrolling when any modal is open
+  useEffect(() => {
+    const isAnyModalOpen =
+      detailTask !== null || isFormOpen || taskToDelete !== null;
+
+    document.body.style.overflow = isAnyModalOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [detailTask, isFormOpen, taskToDelete]);
+
   // Derived tasks for Task Dashboard (strictly In Progress tasks)
   const inProgressTasks = useMemo(() => {
-    return tasks.filter((t) => t.status === 'In Progress');
+    return tasks.filter((t) => t.status === "In Progress");
   }, [tasks]);
 
   // Derived filtered tasks for All Tasks section
   const filteredTasks = useMemo(() => {
-    if (currentFilter === 'All') return tasks;
+    if (currentFilter === "All") return tasks;
     return tasks.filter((t) => t.status === currentFilter);
   }, [tasks, currentFilter]);
 
   // Handlers for modal navigation
   const handleOpenCreateModal = () => {
-    setFormMode('create');
+    setFormMode("create");
     setTaskToEdit(null);
     setIsFormOpen(true);
   };
 
   const handleOpenEditModal = (task: Task) => {
     setDetailTask(null); // Close detail modal if open
-    setFormMode('edit');
+    setFormMode("edit");
     setTaskToEdit(task);
     setIsFormOpen(true);
   };
@@ -107,7 +119,7 @@ export function App() {
       setTasks((prev) => prev.filter((t) => t.id !== taskToDelete.id));
       setTaskToDelete(null);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Failed to delete task.';
+      const msg = err instanceof Error ? err.message : "Failed to delete task.";
       alert(msg);
     } finally {
       setIsDeleting(false);
