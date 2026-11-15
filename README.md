@@ -1,39 +1,48 @@
 # Task Tracker
 
-Aplikasi Task Tracker sederhana berbasis web yang dikembangkan menggunakan **React, FastAPI, dan PostgreSQL** sebagai bagian dari Technical Assessment Software Engineer Intern GLI.
+Aplikasi pengelolaan tugas berbasis web yang dikembangkan menggunakan **React, FastAPI, dan PostgreSQL** sebagai bagian dari Technical Assessment Software Engineer Intern di **PT Global Loyalty Indonesia (GLI)**.
 
-## Gambaran Umum
+Task Tracker dirancang untuk membantu pengguna mengelola aktivitas dan pekerjaan sehari-hari melalui antarmuka yang sederhana, intuitif, dan responsif.
 
-Task Tracker merupakan aplikasi berbasis web yang dirancang untuk membantu pengguna mengelola dan mengorganisasi tugas sehari-hari.
+## Overview
 
-Aplikasi ini nantinya memungkinkan pengguna untuk menambahkan, melihat, mengubah, dan menghapus tugas, serta memantau perkembangan setiap tugas berdasarkan status pengerjaannya.
+Task Tracker merupakan aplikasi yang berfokus pada pengelolaan tugas (_task management_). Pengguna dapat mengorganisasi tugas, melihat detail informasi, memperbarui data, serta memantau progres pengerjaan berdasarkan status masing-masing tugas.
 
-## Teknologi yang Digunakan
+Setiap tugas memiliki tiga status pengerjaan:
+
+- **Todo** — Tugas belum dikerjakan.
+- **In Progress** — Tugas sedang dalam proses pengerjaan.
+- **Done** — Tugas telah diselesaikan.
+
+Aplikasi ini menggunakan arsitektur frontend dan backend yang terpisah. React digunakan untuk membangun antarmuka pengguna, FastAPI menangani proses dan layanan API, sedangkan PostgreSQL digunakan sebagai sistem penyimpanan data.
+
+## Tech Stack
+
+Teknologi dan tools yang digunakan dalam pengembangan aplikasi:
 
 ### Frontend
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- Axios
-- Lucide React
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
+![Lucide React](https://img.shields.io/badge/Lucide_React-F56565?style=for-the-badge&logo=lucide&logoColor=white)
 
 ### Backend
 
-- Python
-- FastAPI
-- SQLAlchemy
-- Pydantic
-- Pydantic Settings
-- Psycopg 3
-- Uvicorn
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=for-the-badge&logo=pydantic&logoColor=white)
+![Uvicorn](https://img.shields.io/badge/Uvicorn-4051B5?style=for-the-badge&logo=gunicorn&logoColor=white)
 
 ### Database
 
-- PostgreSQL
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Psycopg 3](https://img.shields.io/badge/Psycopg_3-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 
-## Struktur Proyek
+## Project Structure
 
 ```text
 task-tracker-gli/
@@ -50,9 +59,10 @@ task-tracker-gli/
 │   └── requirements.txt
 │
 ├── docs/
+│   ├── installation.md
 │   ├── requirements.md
 │   └── system-design.md
-|
+│
 ├── frontend/
 │   ├── public/
 │   ├── src/
@@ -60,7 +70,6 @@ task-tracker-gli/
 │   │   ├── assets/
 │   │   ├── components/
 │   │   ├── types/
-│   │   ├── App.css
 │   │   ├── App.tsx
 │   │   ├── index.css
 │   │   └── main.tsx
@@ -71,15 +80,13 @@ task-tracker-gli/
 └── README.md
 ```
 
-## Status Tugas
+## Installation
 
-Setiap tugas memiliki tiga status pengerjaan:
+Untuk panduan lengkap mengenai persyaratan sistem, konfigurasi environment variables, instalasi dependensi, dan cara menjalankan aplikasi secara lokal, silakan kunjungi:
 
-- **Todo** – Tugas belum dikerjakan.
-- **In Progress** – Tugas sedang dikerjakan.
-- **Done** – Tugas telah selesai.
+[**Installation Guide →**](docs/installation.md)
 
-## Progres Pengembangan
+## Development Progress
 
 - [x] Inisialisasi struktur proyek.
 - [x] Setup React menggunakan Vite dan TypeScript.
@@ -89,11 +96,11 @@ Setiap tugas memiliki tiga status pengerjaan:
 - [x] Konfigurasi environment variables.
 - [x] Konfigurasi koneksi PostgreSQL menggunakan SQLAlchemy.
 - [x] Membuat model database Task.
-- [ ] Implementasi endpoint CRUD backend.
-- [ ] Implementasi antarmuka frontend.
-- [ ] Integrasi frontend dengan backend API.
-- [ ] Pengujian fungsionalitas aplikasi.
+- [x] Implementasi endpoint CRUD backend.
+- [x] Implementasi antarmuka frontend.
+- [x] Integrasi frontend dengan backend API.
+- [x] Pengujian fungsionalitas aplikasi.
 
-## Lisensi
+## License
 
-Proyek ini dikembangkan untuk keperluan Technical Assessment Software Engineer Intern GLI.
+Proyek ini dikembangkan untuk keperluan **Technical Assessment Software Engineer Intern PT Global Loyalty Indonesia (GLI)**.
