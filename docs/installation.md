@@ -29,13 +29,13 @@ git --version
 Clone repository Task Tracker ke komputer lokal:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kvinn-dev/technical-test-gli
 ```
 
 Masuk ke direktori proyek:
 
 ```bash
-cd task-tracker-gli
+cd technical-test-gli
 ```
 
 ## 3. Database Configuration
