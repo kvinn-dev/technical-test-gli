@@ -4,11 +4,17 @@ import type { Task, TaskStatus } from "../types/task";
 interface TaskListItemProps {
   task: Task;
   onClick: (task: Task) => void;
+  isSelecting: boolean;
+  isSelected: boolean;
+  onSelect: () => void;
 }
 
 export const TaskListItem: React.FC<TaskListItemProps> = ({
   task,
   onClick,
+  isSelecting,
+  isSelected,
+  onSelect,
 }) => {
   const getStatusStyle = (status: TaskStatus) => {
     switch (status) {
@@ -35,6 +41,7 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
   const formatDate = (isoString: string) => {
     try {
       const date = new Date(isoString);
+
       return date.toLocaleDateString("id-ID", {
         day: "numeric",
         month: "short",
@@ -47,19 +54,44 @@ export const TaskListItem: React.FC<TaskListItemProps> = ({
 
   const styles = getStatusStyle(task.status);
 
+  const handleClick = () => {
+    if (isSelecting) {
+      onSelect();
+    } else {
+      onClick(task);
+    }
+  };
+
   return (
     <div
-      onClick={() => onClick(task)}
+      onClick={handleClick}
       role="button"
       tabIndex={0}
+      aria-pressed={isSelecting ? isSelected : undefined}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          onClick(task);
+          handleClick();
         }
       }}
-      className={`group border rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-5 flex items-center justify-between gap-2 sm:gap-3 md:gap-4 transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-xs active:scale-[0.99] ${styles.card}`}
+      className={`group border rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-5 flex items-center justify-between gap-2 sm:gap-3 md:gap-4 transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-xs active:scale-[0.99] ${
+        styles.card
+      } ${isSelected ? "ring-2 ring-[#171717] ring-offset-1" : ""}`}
     >
+      {/* Selection Checkbox */}
+      {isSelecting && (
+        <div className="flex-shrink-0 flex items-center justify-center">
+          <input
+            type="checkbox"
+            checked={isSelected}
+            onChange={onSelect}
+            onClick={(e) => e.stopPropagation()}
+            aria-label={`Select ${task.title}`}
+            className="w-4 h-4 sm:w-[18px] sm:h-[18px] accent-[#171717] cursor-pointer"
+          />
+        </div>
+      )}
+
       {/* Title & Description */}
       <div className="flex-1 min-w-0 pr-1 sm:pr-2">
         <h4 className="font-bold text-xs sm:text-sm md:text-[15px] lg:text-lg text-[#171717] group-hover:text-black line-clamp-1 leading-snug">

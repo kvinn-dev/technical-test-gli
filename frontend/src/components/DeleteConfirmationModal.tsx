@@ -1,35 +1,36 @@
-import React, { useEffect } from 'react';
-import { AlertTriangle, Loader2 } from 'lucide-react';
-import type { Task } from '../types/task';
+import React, { useEffect } from "react";
+import { AlertTriangle, Loader2 } from "lucide-react";
+import type { Task } from "../types/task";
 
 interface DeleteConfirmationModalProps {
-  task: Task | null;
+  task?: Task | null;
+  selectedCount?: number;
   isOpen: boolean;
   isDeleting: boolean;
   onClose: () => void;
   onConfirm: () => void;
 }
 
-export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
-  task,
-  isOpen,
-  isDeleting,
-  onClose,
-  onConfirm,
-}) => {
+export const DeleteConfirmationModal: React.FC<
+  DeleteConfirmationModalProps
+> = ({ task, selectedCount, isOpen, isDeleting, onClose, onConfirm }) => {
+  const isBulkDelete = selectedCount !== undefined;
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && !isDeleting) {
+      if (e.key === "Escape" && !isDeleting) {
         onClose();
       }
     };
+
     if (isOpen) {
-      window.addEventListener('keydown', handleKeyDown);
+      window.addEventListener("keydown", handleKeyDown);
     }
-    return () => window.removeEventListener('keydown', handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, isDeleting, onClose]);
 
-  if (!isOpen || !task) return null;
+  if (!isOpen || (!task && !isBulkDelete)) return null;
 
   return (
     <div
@@ -47,12 +48,25 @@ export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = (
         </div>
 
         <h3 className="text-lg sm:text-xl font-bold text-[#171717] mb-2">
-          Delete this task?
+          {isBulkDelete ? "Delete selected tasks?" : "Delete this task?"}
         </h3>
 
         <p className="text-xs sm:text-sm text-[#77777F] leading-relaxed mb-6">
-          Are you sure you want to permanently delete{' '}
-          <strong className="text-[#171717]">"{task.title}"</strong>? This action cannot be undone.
+          {isBulkDelete ? (
+            <>
+              Are you sure you want to permanently delete{" "}
+              <strong className="text-[#171717]">
+                these {selectedCount} tasks
+              </strong>
+              ? This action cannot be undone.
+            </>
+          ) : (
+            <>
+              Are you sure you want to permanently delete{" "}
+              <strong className="text-[#171717]">"{task?.title}"</strong>? This
+              action cannot be undone.
+            </>
+          )}
         </p>
 
         <div className="w-full flex items-center justify-center gap-3">
@@ -64,6 +78,7 @@ export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = (
           >
             Cancel
           </button>
+
           <button
             type="button"
             onClick={onConfirm}
@@ -71,7 +86,7 @@ export const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = (
             className="flex-1 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-sm flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60"
           >
             {isDeleting && <Loader2 className="w-4 h-4 animate-spin" />}
-            <span>Delete</span>
+            <span>{isDeleting ? "Deleting..." : "Delete"}</span>
           </button>
         </div>
       </div>
