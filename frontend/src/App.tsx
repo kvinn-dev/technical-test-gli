@@ -126,6 +126,21 @@ export function App() {
     }
   };
 
+  const handleDeleteSelected = async (taskIds: Task["id"][]) => {
+    try {
+      await Promise.all(taskIds.map((id) => deleteTask(id)));
+
+      setTasks((prev) => prev.filter((task) => !taskIds.includes(task.id)));
+    } catch (err: unknown) {
+      const msg =
+        err instanceof Error ? err.message : "Failed to delete selected tasks.";
+
+      alert(msg);
+      await fetchTasks();
+      throw err;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#E8E8EA] text-[#171717] px-4 py-8 sm:px-6 sm:py-10 md:py-12">
       <main className="max-w-[1100px] mx-auto w-full">
@@ -161,6 +176,7 @@ export function App() {
           onFilterChange={setCurrentFilter}
           onTaskClick={handleTaskClick}
           onAddTaskClick={handleOpenCreateModal}
+          onDeleteSelected={handleDeleteSelected}
         />
 
         {/* Modals */}
