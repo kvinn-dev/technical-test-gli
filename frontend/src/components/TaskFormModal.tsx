@@ -106,16 +106,8 @@ export const TaskFormModal: React.FC<TaskFormModalProps> = ({
   };
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-xs transition-opacity animate-in fade-in duration-150"
-      onClick={() => {
-        if (!isSubmitting) onClose();
-      }}
-    >
-      <div
-        className="bg-white w-full max-w-[500px] max-h-[90vh] overflow-y-auto rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 lg:p-8 shadow-2xl relative flex flex-col hide-scrollbar"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 backdrop-blur-xs transition-opacity animate-in fade-in duration-150">
+      <div className="bg-white w-full max-w-[500px] max-h-[90vh] overflow-y-auto rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 lg:p-8 shadow-2xl relative flex flex-col hide-scrollbar">
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-3 md:pb-4 border-b border-[#F0F0F2] gap-2">
           <h2 className="text-lg sm:text-xl font-bold text-[#171717]">
