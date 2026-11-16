@@ -46,7 +46,7 @@ Teknologi dan tools yang digunakan dalam pengembangan aplikasi:
 ## Project Structure
 
 ```text
-task-tracker-gli/
+technical-test--gli/
 ├── backend/
 │   ├── app/
 │   │   ├── models/
@@ -60,6 +60,7 @@ task-tracker-gli/
 │   └── requirements.txt
 │
 ├── docs/
+│   ├── design.md
 │   ├── docker.md
 │   ├── installation.md
 │   ├── requirements.md
